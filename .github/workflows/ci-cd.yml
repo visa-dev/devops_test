@@ -28,7 +28,7 @@ jobs:
         run: ./gradlew clean build
 
       - name: Upload Test Reports
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: test-reports
           path: build/reports/tests/test
@@ -54,13 +54,13 @@ jobs:
 #        run: ./gradlew bootJar
 #
 #      - name: Login to Docker Hub
-#        uses: docker/login-action@v2
+#        uses: docker/login-action@v3
 #        with:
 #          username: ${{ secrets.DOCKER_USERNAME }}
 #          password: ${{ secrets.DOCKER_PASSWORD }}
 #
 #      - name: Build and Push Docker Image
-#        uses: docker/build-push-action@v3
+#        uses: docker/build-push-action@v5
 #        with:
 #          context: .
 #          push: true
