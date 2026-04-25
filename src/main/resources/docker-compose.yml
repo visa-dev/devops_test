@@ -1,0 +1,55 @@
+version: "3.8"
+
+services:
+
+  mysql-db:
+    image: mysql:8.0
+    container_name: mysql-db
+    restart: unless-stopped
+
+    environment:
+      MYSQL_ROOT_PASSWORD: 11836++
+      MYSQL_DATABASE: kizz4
+
+    ports:
+      - "3306:3306"
+
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+    networks:
+      - app-network
+
+
+  spring-app:
+    build: .
+
+    container_name: spring-app
+    restart: unless-stopped
+
+    ports:
+      - "8080:8080"
+
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+
+    networks:
+      - app-network
+
+
+volumes:
+  mysql_data:
+
+networks:
+  app-network:
+    driver: bridge
