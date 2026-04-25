@@ -1,0 +1,90 @@
+<!-- ================= TOP NAVBAR ================= -->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<nav class="navbar navbar-expand-lg top-navbar fixed-top px-4" th:fragment="navbarFragment">
+    <div class="container-fluid">
+        <!-- Logo -->
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <img src="/projectResources/Images/OG PRO LOGO.png" class="logo-img" alt="Logo">
+        </a>
+
+        <!-- Toggle (mobile) -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Right Side -->
+        <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
+            <form class="d-flex me-3">
+                <input class="form-control me-2" type="search" placeholder="Search">
+                <button class="btn btn-gold btn-sm">Search</button>
+            </form>
+            <span class="me-3 text-muted fw-semibold" th:text="${loggedusername}"> Admin</span>
+            <button class="btn btn-gold btn-sm">
+                <i class="fa-solid fa-user"></i>
+                <span th:text="${loggedusername}">Admin</span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- ================= SIDEBAR ================= -->
+<div class="sidebar" th:fragment="sidebarFragment">
+    <ul class="nav flex-column">
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/dashboard}">
+                <i class="fa-solid fa-chart-bar" style="color: #3a3a3a;"></i> Dashboard
+            </a>
+        </li>
+        <li class="nav-item" sec:authorize="hasAnyAuthority('Admin', 'Trainer', 'Receptionist')">
+            <a class="nav-link" href="/members">
+                <i class="fa-solid fa-dumbbell" style="color: #3a3a3a;"></i> Members
+            </a>
+        </li>
+        <li class="nav-item" sec:authorize="hasAnyAuthority('Admin', 'Trainer', 'Receptionist')">
+            <a class="nav-link" href="/memberships">
+                <i class="fa-solid fa-users-rectangle" style="color: #3a3a3a;"></i> Memberships
+            </a>
+        </li>
+        <li class="nav-item" sec:authorize="hasAnyAuthority('Admin', 'Trainer')">
+            <a class="nav-link" href="/classes">
+                <i class="fa-solid fa-people-group" style="color: #3a3a3a;"></i> Classes
+            </a>
+        </li>
+        <li class="nav-item" sec:authorize="hasAnyAuthority('Admin', 'Trainer')">
+            <a class="nav-link" href="/batch">
+                <i class="fa-solid fa-users-between-lines" style="color: #3a3a3a;"></i> Batch Registration
+            </a>
+        </li>
+        <li class="nav-item" sec:authorize="hasAnyAuthority('Admin', 'Receptionist')">
+            <a class="nav-link" href="/payments">
+                <i class="fa-solid fa-coins" style="color: #3a3a3a;"></i> Payments
+            </a>
+        </li>
+        <li class="nav-item" sec:authorize="hasAnyAuthority('Admin', 'Receptionist')">
+            <a class="nav-link" href="/attendance">
+                <i class="fa-solid fa-clipboard-user" style="color: #3a3a3a;"></i> Attendance
+            </a>
+        </li>
+        <li class="nav-item" sec:authorize="hasAuthority('Admin')">
+            <a class="nav-link" href="/employee">
+                <i class="fa-regular fa-address-book" style="color: #3a3a3a;"></i> Employees
+            </a>
+        </li>
+        <li class="nav-item" sec:authorize="hasAnyAuthority('Admin', 'Trainer', 'Receptionist')">
+            <a class="nav-link" href="/reports">
+                <i class="fa-solid fa-chart-line" style="color: #3a3a3a;"></i> Reports
+            </a>
+        </li>
+        <li class="nav-item" sec:authorize="hasAuthority('Admin')">
+            <a class="nav-link" href="/user">
+                <i class="fa-solid fa-user" style="color: #3a3a3a;"></i> Users
+            </a>
+        </li>
+        <li class="nav-item mt-4">
+            <a class="nav-link text-danger" href="/logout">
+                <i class="fa-solid fa-right-from-bracket" style="color: rgb(205, 22, 22);"></i> Logout
+            </a>
+        </li>
+    </ul>
+</div>

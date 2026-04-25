@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="header :: headerFragment">
+    <title> Our Gym|Employee </title>
+</head>
+
+<body>
+    <!-- ================= TOP NAVBAR ================= -->
+    <nav th:replace="navbar :: navbarFragment"></nav>
+    <!-- ================= SIDEBAR ================= -->
+    <div th:replace="navbar :: sidebarFragment"></div>
+
+    <div class="main-content">
+        <div class="container-fluid ">
+            <div class="row mt-1">
+
+                <div class="card-header  title ">
+                    <div class="row">
+                        <div class="col text-start">
+                            <h3><i class="fa-solid fa-user-tie"></i> EMPLOYEE MANAGEMENT </h3>
+                        </div>
+                        <div class="col text-end">
+                            <button class="btn btn-primary me-1" data-bs-toggle="modal"
+                                data-bs-target="#modalEmployeeForm" onclick="refreshEmployeeForm()">
+                                <i class="fa-solid fa-plus"></i>Add New</button>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <!--Form area-->
+            <div class="modal" id="modalEmployeeForm">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title"> ADD NEW EMPLOYEE </h3>
+                            <button class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- start form area -->
+                            <div class="row m-4">
+                                <div class="col-12">
+
+
+                                    <!-- required -->
+                                    <form id="formEmployee" onsubmit="return false;">
+                                        <div class="row mt-1">
+                                            <div class="col text-end fw-bold">
+                                                <p>Required <span class="text-danger">*</span></p>
+                                            </div>
+                                        </div>
+                                        <!--PERSONAL-->
+                                        <div class="card-header">
+                                            <div class="row ">
+                                                <h3 class="card-title fw-bold fw-light"> PERSONAL </h3>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row mt-2">
+                                                <div class="col-4 text-center">
+                                                    <img id="imgProfilePreview"
+                                                        src="/projectResources/Images/imagesQ.png" alt="Profile Preview"
+                                                        class="img-thumbnail rounded-circle shadow-sm"
+                                                        style="width: 130px; height: 130px; object-fit: cover;">
+                                                </div>
+                                                <div class="col-5">
+                                                    <label for="profileImageInput" class="form-label fw-bold">
+                                                        Profile Image: </label>
+                                                    <input type="file" id="profileImageInput" class="form-control"
+                                                        accept="image/*" onchange="previewProfileImage(event)">
+                                                    <small class="text-muted">Upload JPG, PNG or JPEG (max 2MB)</small>
+                                                </div>
+
+                                                <!-- <div class="col-2">
+                                                <label class="form-label d-block">Status <span class="text-danger">*</span></label>
+                                                <div class="form-check form-switch d-inline-block">
+                                                    <input class="form-check-input" type="checkbox" id="statusSwitch"
+                                                        checked>
+                                                    <label class="form-check-label" for="statusSwitch">Active</label>
+                                                </div>
+                                            </div> -->
+
+                                            </div>
+                                            <div class="row mt-2">
+                                                <div class="col-md-3">
+                                                    <label class="form-label">First Name <span
+                                                            class="text-danger">*</span></label>
+                                                    <input name="firstName" id="firstName" type="text"
+                                                        class="form-control" />
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="form-label">Last Name <span
+                                                            class="text-danger">*</span></label>
+                                                    <input name="lastName" id="lastName" type="text"
+                                                        class="form-control" />
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="form-label">NIC <span
+                                                            class="text-danger">*</span></label>
+                                                    <input name="nic" id="textNic" type="text" class="form-control" />
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label class="form-label">Gender </label>
+                                                    <select id="genderSelect" name="gender" class="form-select">
+                                                        <option value="">Select</option>
+                                                        <option value="male">Male</option>
+                                                        <option value="female">Female</option>
+                                                        <option value="other">Other</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                            <div class="row mt-2">
+                                                <div class="col-md-4">
+                                                    <label class="form-label">Date of Birth </label>
+                                                    <input name="dob" id="dob" type="date" class="form-control" />
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="form-label">Contact Number <span
+                                                            class="text-danger">*</span></label>
+                                                    <input name="phone" id="mobileno" type="tel" class="form-control" />
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label class="form-label">Email</label>
+                                                    <input name="email" id="email" type="email" class="form-control" />
+                                                </div>
+                                            </div>
+                                            <div class=" row mt-2">
+                                                <div class="col-md-3">
+                                                    <label class="form-label">Designation <span
+                                                            class="text-danger">*</span></label>
+                                                    <select id="selectDesignation" class="form-select"
+                                                        required></select>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    <label class="form-label">Joining Date <span
+                                                            class="text-danger">*</span></label>
+                                                    <input name="joinDate" id="dateJoin" type="date"
+                                                        class="form-control" />
+                                                </div>
+                                                <div class="col-md-3" id="divTrainerType" style="display: none;">
+                                                    <label class="form-label">Trainer Type <span
+                                                            class="text-danger">*</span></label>
+                                                    <select name="trainertype" id="trainerTypeSelect"
+                                                        class="form-select input-element">
+                                                        <option value="" selected disabled>Select Trainer Type</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div> <br>
+
+                                        <!--DOCUMENTS-->
+                                        <div class="card-header">
+                                            <div class="row ">
+                                                <h3 class="card-title fw-bold fw-light"> DOCUMENTS </h3>
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row mt-2">
+                                                <div class="col-md-6">
+                                                    <label class="form-label">NIC / Passport (Upload) </label>
+                                                    <input name="nicFile" type="file" class="form-control" />
+                                                </div>
+
+                                                <div class="col-6">
+                                                    <label class="form-label">Contract / Appointment Letter </label>
+                                                    <input name="contractFile" type="file" class="form-control" />
+                                                </div>
+                                            </div>
+                                        </div> <br>
+                                        <!-- button -->
+                                        <div class="row m-2 text-end ">
+
+                                            <div id="divButtonClear" class="col-2 text-end">
+                                                <button class="btn btn-outline-info me-2 fw-bold " type="reset"
+                                                    id="buttonEmpClear" onclick="buttonEmployeeClear()"> Clear
+                                                </button>
+                                            </div>
+
+                                            <div id="divButtonEmpUpdate" class="col-1 text-end">
+                                                <button class="btn btn-outline-primary me-2 fw-bold" type="submit"
+                                                    id="buttonEmpUpdate" onclick="buttonEmployeeUpdate()"> Update
+                                                </button>
+                                            </div>
+
+                                            <div id="divButtonEmpSubmit" class="col-1 text-end">
+                                                <button class="btn btn-outline-success  fw-bold" type="submit"
+                                                    id="buttonEmpSubmit" onclick="buttonEmployeeSubmit()"> Submit
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- end form area -->
+
+
+
+
+
+            <!-- start table area -->
+            <div class="row m-2">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table table-hover table-sm">
+                                <thead id="tableHeadEmployee" class="table-light">
+                                    <tr>
+
+                                        <th> # </th>
+
+                                        <th> Name </th>
+                                        <th> Nic </th>
+                                        <th> Contact No </th>
+                                        <th> DOB </th>
+                                        <th> Email </th>
+
+
+
+                                        <th> </th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="tableBodyEmployee">
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- end table area -->
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <div th:replace="footer :: footerFragment"></div>
+    
+    <!-- Common JS -->
+    <script src="/projectResources/jQuery-4.0.0.min.js"></script>
+    <script src="/projectResources/bootstrap-5.3.7/js/bootstrap.bundle.min.js"></script>
+    <script src="/projectResources/common.js"></script>
+    
+    <!-- Link employee js -->
+    <script src="/js/employee.js"></script>
+</body>
+
+</html>

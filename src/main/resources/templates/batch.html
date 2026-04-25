@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="header :: headerFragment">
+    <title> Our Gym|Batch Registration </title>
+</head>
+
+<body>
+    <!-- ================= TOP NAVBAR ================= -->
+    <nav th:replace="navbar :: navbarFragment"></nav>
+
+    <!-- ================= SIDEBAR ================= -->
+    <div th:replace="navbar :: sidebarFragment"></div>
+
+    <!-- ================= MAIN CONTENT ================= -->
+    <div class="main-content">
+        <div class="container-fluid mt-5 pt-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <h2>Batch Registration</h2>
+                            <p class="text-muted">Manage batch registrations and schedules</p>
+                        </div>
+                        <button class="btn btn-primary" onclick="showAddModal()">
+                            <i class="fa-solid fa-plus"></i> Add Batch
+                        </button>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Batch List</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="loadingSpinner" class="text-center py-4" style="display: none;">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <p class="mt-2">Loading batches...</p>
+                            </div>
+                            
+                            <div id="batchTableContainer">
+                                <table class="table table-striped table-hover" id="batchTable">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Batch Name</th>
+                                            <th>Trainer Type</th>
+                                            <th>Schedule</th>
+                                            <th>Capacity</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="batchTableBody">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Modal -->
+    <div class="modal fade" id="batchModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Add Batch</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="batchForm">
+                        <input type="hidden" id="batchId">
+                        
+                        <div class="mb-3">
+                            <label for="batchName" class="form-label">Batch Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="batchName" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="trainerType" class="form-label">Trainer Type <span class="text-danger">*</span></label>
+                            <select class="form-control" id="trainerType" required>
+                                <option value="">Select Trainer Type...</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="schedule" class="form-label">Schedule <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" id="schedule" placeholder="e.g., Mon, Wed, Fri 6:00 AM - 7:00 AM" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="maxCapacity" class="form-label">Max Capacity <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control" id="maxCapacity" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea class="form-control" id="description" rows="3"></textarea>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="status" class="form-label">Status</label>
+                            <select class="form-control" id="status">
+                                <option value="true">Active</option>
+                                <option value="false">Inactive</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" onclick="saveBatch()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/projectResources/jQuery-4.0.0.min.js"></script>
+    <script src="/projectResources/bootstrap-5.3.7/js/bootstrap.bundle.min.js"></script>
+    <script src="/projectResources/common.js"></script>
+    <script src="/js/batch.js"></script>
+</body>
+</html>

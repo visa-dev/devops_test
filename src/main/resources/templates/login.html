@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="~{header :: headerFragment}">
+    <title> Our Gym|Login </title>
+</head>
+
+<head>
+    <link rel="stylesheet" href="/projectResources/css/login.css">
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="login-card col-4">
+
+
+                <!--                <div class="logo">-->
+                <!--                    <img src="/projectResources/Images/OG%20PRO%20LOGO.png" alt="Gym Logo">-->
+                <!--                </div>-->
+                <h4 class="login-title">Welcome to Our Gym</h4>
+
+                <form method="post" action="/login">
+
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        <input type="text" name="username" class="form-control" placeholder="Enter username" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" name="password" class="form-control" placeholder="Enter password"
+                            required>
+                    </div>
+
+                    <div class="d-grid mt-4">
+                        <button type="submit" class="btn btn-gold">Login</button>
+                    </div>
+                    <div th:if="${param.error}" class="alert-danger mt-3 p-2 rounded text-center">
+                        <h6 class="text-danger m-0">Please Enter Valid User Credentials!</h6>
+                    </div>
+
+                </form>
+
+            </div>
+            <div class="col-4"></div>
+        </div>
+    </div>
+
+
+
+    <div th:replace="~{footer :: footerFragment}"></div>
+
+</body>
+
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="header :: headerFragment">
+    <title>Our Gym | Dashboard</title>
+</head>
+
+<body>
+    <!-- ================= TOP NAVBAR ================= -->
+    <nav th:replace="navbar :: navbarFragment"></nav>
+
+    <!-- ================= SIDEBAR ================= -->
+    <div th:replace="navbar :: sidebarFragment"></div>
+
+    <!-- ================= MAIN CONTENT ================= -->
+    <div class="main-content">
+        <div class="container-fluid mt-5 pt-4">
+            
+            <!-- Welcome Header -->
+            <div class="row mb-4">
+                <div class="col-12">
+                    <h2 class="text-primary fw-bold">
+                        <i class="fa-solid fa-dumbbell me-2"></i>Welcome to Our Gym
+                    </h2>
+                    <p class="text-muted"><i class="fa-regular fa-clock me-1"></i><span id="currentDateTime"></span></p>
+                </div>
+            </div>
+
+            <!-- Main Statistics Cards -->
+            <div class="row mb-4">
+                <div class="col-xl-4 col-md-6 mb-3">
+                    <div class="card stat-card h-100 border-0 shadow" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <div class="card-body text-white">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-white-50 mb-1">Total Members</h6>
+                                    <h3 class="mb-0 fw-bold" th:text="${totalMembers}">0</h3>
+                                </div>
+                                <div class="icon-circle bg-white bg-opacity-25 rounded-circle p-3">
+                                    <i class="fa-solid fa-users fa-2x text-white"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6 mb-3">
+                    <div class="card stat-card h-100 border-0 shadow" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                        <div class="card-body text-white">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-white-50 mb-1">Paid This Month</h6>
+                                    <h3 class="mb-0 fw-bold" th:text="${paidCount}">0</h3>
+                                </div>
+                                <div class="icon-circle bg-white bg-opacity-25 rounded-circle p-3">
+                                    <i class="fa-solid fa-check-circle fa-2x text-white"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-md-6 mb-3">
+                    <div class="card stat-card h-100 border-0 shadow" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <div class="card-body text-white">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-white-50 mb-1">Not Paid This Month</h6>
+                                    <h3 class="mb-0 fw-bold" th:text="${notPaidCount}">0</h3>
+                                </div>
+                                <div class="icon-circle bg-white bg-opacity-25 rounded-circle p-3">
+                                    <i class="fa-solid fa-exclamation-triangle fa-2x text-white"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Secondary Stats -->
+            <div class="row mb-4">
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="card h-100 border-0 shadow text-center">
+                        <div class="card-body">
+                            <i class="fa-solid fa-clipboard-check fa-2x text-info mb-2"></i>
+                            <h5 class="mb-1 fw-bold" id="todayAttendance">0</h5>
+                            <small class="text-muted">Today's Attendance</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="card h-100 border-0 shadow text-center">
+                        <div class="card-body">
+                            <i class="fa-solid fa-user-tie fa-2x text-secondary mb-2"></i>
+                            <h5 class="mb-1 fw-bold" th:text="${totalEmployees}">0</h5>
+                            <small class="text-muted">Total Employees</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="card h-100 border-0 shadow text-center">
+                        <div class="card-body">
+                            <i class="fa-solid fa-chalkboard-user fa-2x text-primary mb-2"></i>
+                            <h5 class="mb-1 fw-bold" th:text="${activeClasses}">0</h5>
+                            <small class="text-muted">Active Classes</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6 mb-3">
+                    <div class="card h-100 border-0 shadow text-center">
+                        <div class="card-body">
+                            <i class="fa-solid fa-users-rectangle fa-2x text-warning mb-2"></i>
+                            <h5 class="mb-1 fw-bold" th:text="${activeBatches}">0</h5>
+                            <small class="text-muted">Active Batches</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions & Recent Activity -->
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-0 shadow">
+                        <div class="card-header bg-white">
+                            <h5 class="mb-0 fw-bold"><i class="fa-solid fa-bolt text-warning me-2"></i>Quick Actions</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-grid gap-2">
+                                <a href="/members" class="btn btn-outline-primary"><i class="fa-solid fa-user-plus me-2"></i>Add Member</a>
+                                <a href="/payments" class="btn btn-outline-success"><i class="fa-solid fa-money-bill me-2"></i>Record Payment</a>
+                                <a href="/attendance" class="btn btn-outline-info"><i class="fa-solid fa-clipboard-check me-2"></i>Mark Attendance</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-0 shadow">
+                        <div class="card-header bg-white d-flex justify-content-between">
+                            <h5 class="mb-0 fw-bold"><i class="fa-solid fa-clock-rotate-left text-primary me-2"></i>Recent Payments</h5>
+                            <a href="/payments" class="btn btn-sm btn-outline-primary">View All</a>
+                        </div>
+                        <div class="card-body p-0">
+                            <div id="recentPaymentsList" class="list-group list-group-flush">
+                                <div class="list-group-item text-center text-muted py-4">Loading...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 border-0 shadow">
+                        <div class="card-header bg-white d-flex justify-content-between">
+                            <h5 class="mb-0 fw-bold"><i class="fa-solid fa-user-check text-success me-2"></i>Today's Attendance</h5>
+                            <a href="/attendance" class="btn btn-sm btn-outline-success">View All</a>
+                        </div>
+                        <div class="card-body text-center">
+                            <div class="row">
+                                <div class="col-4">
+                                    <h4 class="text-success fw-bold" id="presentCount">0</h4>
+                                    <small class="text-muted">Present</small>
+                                </div>
+                                <div class="col-4">
+                                    <h4 class="text-warning fw-bold" id="lateCount">0</h4>
+                                    <small class="text-muted">Late</small>
+                                </div>
+                                <div class="col-4">
+                                    <h4 class="text-danger fw-bold" id="absentCount">0</h4>
+                                    <small class="text-muted">Absent</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div th:replace="footer :: footerFragment"></div>
+
+    <script>
+        // Set current date and time with live update
+        function updateDateTime() {
+            document.getElementById('currentDateTime').textContent = new Date().toLocaleString('en-US', {
+                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+                hour: '2-digit', minute: '2-digit', second: '2-digit'
+            });
+        }
+        updateDateTime();
+        setInterval(updateDateTime, 1000);
+
+        function loadTodayStats() {
+            let today = new Date().toISOString().split('T')[0];
+            
+            $.ajax({
+                url: '/attendance/bydate?date=' + today,
+                type: 'GET',
+                success: function(data) {
+                    let present = data.filter(a => a.status === 'PRESENT').length;
+                    let late = data.filter(a => a.status === 'LATE').length;
+                    let absent = data.filter(a => a.status === 'ABSENT').length;
+                    
+                    $('#todayAttendance').text(data.length);
+                    $('#presentCount').text(present);
+                    $('#lateCount').text(late);
+                    $('#absentCount').text(absent);
+                }
+            });
+
+            $.ajax({
+                url: '/payments/alldata',
+                type: 'GET',
+                success: function(payments) {
+                    let recent = payments.filter(p => !p.deleteddatetime)
+                        .sort((a, b) => new Date(b.paymentDate) - new Date(a.paymentDate))
+                        .slice(0, 5);
+                    
+                    let html = recent.length === 0 ? 
+                        '<div class="list-group-item text-center text-muted py-4">No recent payments</div>' :
+                        recent.map(p => `
+                            <div class="list-group-item d-flex justify-content-between">
+                                <div>
+                                    <h6 class="mb-0">${p.member?.name || 'Unknown'}</h6>
+                                    <small class="text-muted">${p.paymentDate ? new Date(p.paymentDate).toLocaleDateString() : '-'}</small>
+                                </div>
+                                <span class="badge bg-success">LKR ${(p.amount || 0).toFixed(2)}</span>
+                            </div>
+                        `).join('');
+                    
+                    $('#recentPaymentsList').html(html);
+                }
+            });
+        }
+
+        $(document).ready(loadTodayStats);
+    </script>
+
+    <style>
+        .stat-card { transition: transform 0.3s ease, box-shadow 0.3s ease; border-radius: 15px; }
+        .stat-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.15) !important; }
+        .icon-circle { width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; }
+        .card { border-radius: 15px; }
+        .card-header { border-radius: 15px 15px 0 0 !important; }
+    </style>
+</body>
+</html>

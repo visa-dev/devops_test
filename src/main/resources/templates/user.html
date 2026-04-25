@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="header :: headerFragment">
+    <title>Our Gym|User </title>
+</head>
+<!-- Select2 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<style>
+    .select2-container .select2-selection--single {
+        height: 38px;
+        padding: 5px 8px;
+        border: 1px solid #ced4da;
+        border-radius: 6px;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        height: 36px;
+    }
+
+    .select2-container {
+        width: 100% !important;
+    }
+</style>
+
+
+<body>
+    <!-- ================= TOP NAVBAR ================= -->
+    <nav th:replace="navbar :: navbarFragment"></nav>
+    <!-- ================= SIDEBAR ================= -->
+    <div th:replace="navbar :: sidebarFragment"></div>
+
+    <div class="main-content">
+        <div class="container-fluid">
+            <div class="row mt-1">
+
+                <div class="card-header  title ">
+                    <div class="row">
+                        <div class="col text-start">
+                            <h3><i class="fa-solid fa-user"></i> USER MANAGEMENT </h3>
+                        </div>
+                        <div class="col text-end">
+                            <button class="btn btn-primary me-1" data-bs-toggle="modal" data-bs-target="#modalUserForm">
+                                <i class="fa-solid fa-plus"></i>Add New</button>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <!--Form area-->
+            <div class="modal" id="modalUserForm">
+                <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="modalTitle"> ADD NEW USER </h3>
+                            <button class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- start form area -->
+                            <form id="formUser" onsubmit="return false">
+                                <!--required mark-->
+                                <div class="row mt-1">
+                                    <div class="col text-end fw-bold">
+                                        <p>Required <span class="text-danger">*</span></p>
+                                    </div>
+                                </div>
+                                <!--required mark-->
+
+                                <!--Emplyee Start-->
+                                <div class="row mt-2">
+                                    <label for="selectEmployee" class="form-label fw-bold col-4">Employee : <span
+                                            class="text-danger">*</span> </label>
+                                    <div class="col-8">
+                                        <select required name="" id="selectEmployee" class="form-select"
+                                            data-toggle="tooltip" data-placement="top" title="Select Employee">
+                                        </select>
+                                        <small class="text-muted">Type to search employee by name</small>
+                                    </div>
+                                </div>
+                                <!--Emplyee End-->
+                                <!--Username start-->
+                                <div class="row mt-2">
+                                    <label for="textUsername" id="userName" class="form-label fw-bold col-4">Username :
+                                        <span class="text-danger">*</span></label>
+                                    <div class="col-8">
+                                        <input required type="text" placeholder="Enter Username" id="textUsername"
+                                            data-toggle="tooltip" data-placement="top"
+                                            title="Please Enter Valid Username" class="form-control">
+                                    </div>
+                                </div>
+                                <!--Username end-->
+                                <!--Password start-->
+                                <div class="row mt-2">
+                                    <label for="textPassword" id="txtPassword" class="form-label fw-bold col-4">Password
+                                        : <span class="text-danger">*</span></label>
+                                    <div class="col-8">
+                                        <input required type="password" placeholder="Enter Password" id="textPassword"
+                                            data-toggle="tooltip" data-placement="top"
+                                            title="Please Enter Valid Password" class="form-control">
+                                    </div>
+                                </div>
+                                <!--Password end-->
+                                <!--Retype Password start-->
+                                <div class="row mt-2">
+                                    <label class="form-label fw-bold col-4">Retype-Password : <span
+                                            class="text-danger">*</span></label>
+                                    <div class="col-8">
+                                        <input required type="password" placeholder="Re-Enter Password"
+                                            id="textRePassword" data-toggle="tooltip" data-placement="top"
+                                            title="Please Re-Enter Your Password" class="form-control">
+                                    </div>
+                                </div>
+                                <!-- Retype Password end-->
+                                <!--Email Start-->
+                                <div class="row mt-2">
+                                    <label for="textEmail" class="form-label fw-bold col-4">Email : <span
+                                            class="text-danger">*</span></label>
+                                    <div class="col-8">
+                                        <input required type="text" placeholder="Enter Email" id="textEmail"
+                                            data-toggle="tooltip" data-placement="top" title="Please Enter Your Email"
+                                            class="form-control">
+                                    </div>
+                                </div>
+                                <!--Email End-->
+                                <!--Roles Start-->
+                                <div class="row mt-2" id="divRole">
+                                    <label class="form-label fw-bold col-4">Roles : <span
+                                            class="text-danger">*</span></label>
+                                    <div class="col-8" id="divRolesParent">
+
+                                    </div>
+                                </div>
+                                <!--Roles End-->
+                                <!--Note Start-->
+                                <div class="row mt-2">
+                                    <label for="textEmail" class="form-label fw-bold col-4">Note : </label>
+                                    <div class="col-8">
+                                        <textarea name="" id="textNote" class="form-control" data-toggle="tooltip"
+                                            data-placement="top" title="Please Enter Note"></textarea>
+                                    </div>
+                                </div>
+                                <!--Note End-->
+                                <!--Status Start-->
+                                <div class="row mt-2">
+                                    <label for="checkUserStatus" class="form-label fw-bold col-4">User Status : <span
+                                            class="text-danger">*</span></label>
+                                    <div class="col-8">
+                                        <div class="form-check-inline">
+                                            <input type="checkbox" id="checkUserStatus" class="form-check-input"
+                                                data-toggle="tooltip" data-placement="top"
+                                                title="Please tik the user status" onclick="if (this.checked) {
+                                            lblUserStatus.innerText = 'User Account is Active';
+                                        user.status = true ;
+                                       } else {
+                                        lblUserStatus.innerText = 'User Account Not Active';
+                                        user.status = false ;
+
+                                       }">
+                                            <label id="lblUserStatus" for="checkUserStatus"
+                                                class="form-check-label fw-bold">User Account is
+                                                Active</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--Status End-->
+
+
+                                <!--Button area Start-->
+                                <div class="row mt-2 p-3">
+                                    <div class="col-2">
+                                        <button class="btn btn-outline-primary me-2 fw-bold" type="submit"
+                                            id="buttonUpdateUser" onclick="buttonUserUpdate()"> Update
+                                        </button>
+                                    </div>
+                                    <div class="col-1 text-end "><button class="btn btn-outline-success  fw-bold"
+                                            type="submit" id="buttonSubmitUser" onclick="buttonUserSubmit()"> Submit
+                                        </button>
+                                    </div>
+
+                                    <div class="col-2 text-end">
+                                        <button class="btn btn-outline-info me-2 fw-bold " type="reset"
+                                            id="buttonClearUser" onclick="buttonUserClear()"> Clear
+                                        </button>
+                                    </div>
+
+                                </div>
+                                <!--Button area end-->
+
+                            </form>
+                            <!--form end-->
+
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- end form area -->
+
+            <!--table area start-->
+
+            <div class="row mt-2">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <table class="table table-hover table-sm">
+                                <thead id="tableHeadEmployee" class="table-light">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Employee Name</th>
+                                        <th>Username</th>
+                                        <th>Email</th>
+                                        <th>Roles</th>
+                                        <th>status</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tableBodyUser">
+
+                                </tbody>
+                            </table>
+
+
+                        </div>
+                    </div>
+                </div>
+                <!--table area end-->
+            </div>
+        </div>
+    </div>
+
+
+    <div th:replace="footer :: footerFragment"></div>
+
+    <!-- Common JS -->
+    <script src="/projectResources/jQuery-4.0.0.min.js"></script>
+    <script src="/projectResources/bootstrap-5.3.7/js/bootstrap.bundle.min.js"></script>
+    <script src="/projectResources/common.js"></script>
+    
+    <!--link user js-->
+    <script src="/js/user.js"></script>
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        // Initialize Select2 on the employee dropdown for search support
+        $("#selectEmployee").select2({
+            placeholder: "Select Employee...!",
+            allowClear: true,
+            width: "100%",
+            dropdownParent: $("#modalUserForm")
+        });
+
+        // When the modal is shown (Add New), refresh the form incl. dropdown
+        $("#modalUserForm").on("show.bs.modal", function () {
+            const isUpdate = buttonUpdateUser.style.display !== "none";
+            if (!isUpdate) {
+                refreshUserForm();
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

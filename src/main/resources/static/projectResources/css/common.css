@@ -1,0 +1,676 @@
+:root {
+  --bg-primary: #fefcf7;
+  --bg-secondary: #ffffff;
+  --border-color: #d9d9d9;
+  --text-primary: #2b2b2b;
+  --text-secondary: #606060;
+  --accent-gold: #c2a25d;
+  --accent-hover: #f2ce7e;
+  --accent-sage: #91c49b;
+  --accent-info: #7cb8f7;
+  --danger: #f56c6c;
+}
+
+/* Page Base */
+body {
+  background-color: var(--bg-primary);
+  background-image: url("../../projectResources/Images/IvoryWhiteGym.png");
+  background-repeat: repeat;
+  background-size: 250px 250px;  /* Adjust pattern density */
+  background-attachment: fixed;
+  color: var(--text-primary);
+  font-family: "Poppins", sans-serif;
+}
+
+.main-content {
+    margin-left: 250px;   /* same as sidebar width */
+    margin-top: 70px;     /* same as navbar height */
+    padding: 30px;
+}
+
+
+
+
+
+
+/* Header Section */
+.title {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 15px 25px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  color: var(--accent-gold);
+}
+
+.title h3 {
+  font-weight: 600;
+  color: var(--accent-gold);
+}
+
+/* Buttons */
+.btn {
+  font-weight: 600;
+  border-radius: 8px;
+  transition: 0.3s ease;
+}
+
+/* Add new button*/
+/* Primary - Elegant Gold */
+.btn-primary {
+  background-color: var(--accent-gold);
+  border: none;
+  color: #fff;
+}
+.btn-primary:hover {
+  background-color: var(--accent-hover);
+  color: #000;
+}
+
+
+
+/* Outline Variants */
+.btn-outline-primary {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+.btn-outline-primary:hover {
+  background-color: var(--accent-gold);
+  color: #fff;
+}
+
+.btn-outline-success {
+  border-color: var(--accent-sage);
+  color: var(--accent-sage);
+}
+.btn-outline-success:hover {
+  background-color: var(--accent-sage);
+  color: #fff;
+}
+
+.btn-outline-info {
+  border-color: var(--accent-info);
+  color: var(--accent-info);
+}
+.btn-outline-info:hover {
+  background-color: var(--accent-info);
+  color: #fff;
+}
+
+/* Table Styling */
+/* ------------------------------ */
+/*      TABLE - LIGHT THEME       */
+/* ------------------------------ */
+
+.table {
+  width: 100%;
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  font-size: 0.95rem;
+}
+
+/* Table Header */
+.table thead {
+  background-color: #fefcf7; /* matches your ivory tone */
+  color: var(--accent-gold);
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.table thead th {
+  padding: 8px 10px;
+  border-top: none;
+}
+
+/* Table Body */
+.table tbody tr {
+  border-bottom: 1px solid var(--border-color);
+   /* transition: all 0.2s ease;  */
+}
+
+.table tbody td {
+  padding: 4px 6px;
+  vertical-align: middle;
+  color: var(--text-secondary);
+}
+
+/* Hover Effect */
+.table tbody tr:hover {
+  background-color: rgba(145, 196, 155, 0.15); /* subtle sage green glow */
+   transform: scale(1.005); 
+}
+
+/* Rounded Corners */
+.table-container {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Table Borders & Striping */
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* Header Alignment */
+.table th {
+  border: none;
+  vertical-align: middle;
+}
+
+/* Add Shadow to Header */
+.table thead {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Highlighted Row (Optional, e.g., selected employee) */
+.table tr.selected-row {
+  background-color: rgba(242, 206, 126, 0.3); /* light gold highlight */
+  font-weight: 600;
+}
+
+/* Common badge base style STATUS */ 
+.status-badge {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  color: #fff;
+  text-align: center;
+  font-size: 13px;
+  letter-spacing: 0.3px;
+  text-transform: capitalize;
+}
+
+/* Working (Green) */
+.status-working {
+  background-color: #16a085;
+  box-shadow: 0 2px 4px rgba(22, 160, 133, 0.3);
+}
+
+/* Resigned (Gray) */
+.status-resigned {
+  background-color: #7f8c8d;
+  box-shadow: 0 2px 4px rgba(127, 140, 141, 0.3);
+}
+
+/* Suspended (Red) */
+.status-suspended {
+  background-color: #c0392b;
+  box-shadow: 0 2px 4px rgba(192, 57, 43, 0.3);
+}
+
+
+/* Modal Styling */
+.modal-content {
+  background: rgba(255, 255, 255, 0.72); /* translucent white */
+  backdrop-filter: blur(10px);            /* glass blur effect */
+  -webkit-backdrop-filter: blur(10px);    /* Safari support */
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.modal-header {
+  background-color: #faf9f5; /* light ivory tone */
+  border-bottom: 1px solid var(--border-color);
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+.modal-title {
+  color: var(--accent-gold);
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.modal-body {
+  background-color: #ffffff; /* clean white body for clarity */
+  padding: 25px 30px;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+/* modal body cards*/
+.card-header {
+    background: #faf9f5;        /* light grey */
+    border-bottom: 2px solid #dee2e6;
+    padding: 12px 20px;
+}
+
+.card-header h3 {
+    font-size: 1.3rem;
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+
+/* Form Styling */
+.form-label {
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.form-control,
+.form-select,
+textarea {
+  background-color: #fafafa;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 8px 10px;
+  transition: 0.2s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--accent-sage);
+  box-shadow: 0 0 5px rgba(145, 196, 155, 0.4);
+  background-color: #ffffff;
+}
+
+/* Placeholder */
+::placeholder {
+  color: #999;
+}
+
+/* Status Badges */
+.status-badge {
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  color: #fff;
+  font-size: 13px;
+}
+
+.status-working {
+  background-color: var(--accent-sage);
+}
+
+.status-resigned {
+  background-color: #a8a8a8;
+}
+
+.status-suspended {
+  background-color: var(--danger);
+}
+
+/* Scrollbar (Soft) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--accent-sage);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+/* -------------------------
+   Custom Modal Nav Tab Styles
+   ------------------------- */
+
+/* Normal tab text */
+.nav-tabs .nav-link {
+  color: #444;                     /* Default font color */
+  font-weight: 600;                /* Slightly bold */
+  font-size: 16px;                 /* Text size */
+  text-transform: uppercase;       /* Make all caps */
+  border: none;                    /* Remove default border */
+  background-color: transparent;   /* No background */
+  transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.nav-tabs .nav-link:hover {
+  color: #f2ce7e;                  /* Change color on hover */
+  background-color: #f2ce7e ;
+  border-radius: 6px;
+}
+
+/* Active tab */
+.nav-tabs .nav-link.active {
+  color: #fff;                     /* White text */
+  background-color:#c2a25d;       /* Blue background */
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+/* Optional: underline active tab instead of background */
+.nav-tabs.underline-style .nav-link.active {
+  color: #f2ce7e;
+  background-color: transparent;
+  border-bottom: 3px solid #c2a25d;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Space below tabs */
+.tab-content {
+  margin-top: 15px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .nav-tabs .nav-link {
+    font-size: 14px;
+    padding: 6px 8px;
+  }
+}
+
+/* ============================
+   Modal Selection + Form Styles
+   ============================ */
+
+/* Selection cards (Member / Student) */
+.select-card {
+  cursor: pointer;
+  border: 2px solid #e0e0e0;
+  border-radius: 10px;
+  transition: all 0.25s ease-in-out;
+  background-color: #fff;
+}
+
+.select-card:hover {
+  border-color: #c2a25d; /* Gym red accent */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+}
+
+.select-card .card-body {
+  padding: 25px 10px;
+}
+
+.select-icon {
+  font-size: 36px;
+  color: #c2a25d;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.select-card h6 {
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.select-card p {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+/* ---------------------------
+   Inner form (Member/Student)
+   --------------------------- */
+
+#memberFormView, #studentFormView {
+  animation: fadeIn 0.4s ease;
+  background-color: #fafafa;
+  padding: 15px 20px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+#memberFormView h5, #studentFormView h5 {
+  font-weight: 700;
+  color: #222;
+}
+
+#memberFormView .form-label,
+#studentFormView .form-label {
+  color: #333;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* -------------------------
+   Buttons inside modal
+   ------------------------- */
+.btn-success {
+  background-color: #ff1e1e !important;
+  border: none !important;
+  font-weight: 600;
+}
+
+.btn-success:hover {
+  background-color: #e60000 !important;
+}
+
+.btn-outline-secondary {
+  font-weight: 600;
+  color: #333;
+  border: 1px solid #aaa;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #f2f2f2;
+  color: #000;
+}
+
+/* -------------------------
+   Smooth animation
+   ------------------------- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* -------------------------
+   Responsive adjustments
+   ------------------------- */
+@media (max-width: 768px) {
+  .select-card .card-body {
+    padding: 20px 5px;
+  }
+  .select-icon {
+    font-size: 28px;
+  }
+  #memberFormView, #studentFormView {
+    padding: 10px;
+  }
+}
+
+/* --- Custom Toggle Switch --- */
+.form-switch .form-check-input {
+  width: 60px;
+  height: 30px;
+  background-color: #606060; /* red = Inactive */
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+.form-switch .form-check-input::before {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 24px;
+  height: 24px;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.3);
+}
+
+/* active (ON) state */
+.form-switch .form-check-input:checked {
+  background-color: #91c49b; /* green = Active */
+}
+
+.form-switch .form-check-input:checked::before {
+  transform: translateX(30px);
+}
+
+/* label beside switch */
+.form-switch .form-check-label {
+  margin-left: 10px;
+  font-weight: 600;
+  color: #333;
+}
+.form-label.point::before {
+  content: "";
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #007bff;   /* blue dot */
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.label-heading::before {
+  content: "";
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #28a745;   /* green dot for section titles */
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* ================= TOP NAV ================= */
+
+.top-navbar {
+    height: 70px;
+    background-color: #f3efe4;
+    /*border-bottom: 2px solid #d4af37;*/
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+/* Logo styling */
+.logo-img {
+    height: 180px;      /* Adjust this number */
+    width: 210px;       /* Maintain aspect ratio */
+    /*object-fit: contain;*/
+    margin-left: 0px;
+    transition: 0.3s ease;
+}
+
+
+.logo-img:hover {
+    transform: scale(1.05);
+}
+/*.top-navbar .navbar-brand img {*/
+/*    height: 40px;*/
+/*}*/
+
+.btn-gold {
+    background-color: #d4af37;
+    color: white;
+    border: none;
+}
+
+.btn-gold:hover {
+    background-color: #c19b2e;
+    color: white;
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar {
+    width: 250px;
+    min-width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    background-color: #f3efe4;
+    /*border-right: 2px solid #d4af37;*/
+    padding-top: 20px;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.03);
+}
+
+.sidebar .nav-link {
+    color: #3a3a3a;
+    padding: 12px 20px;
+    margin: 5px 10px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.sidebar .nav-link:hover {
+    background-color: rgba(212, 175, 55, 0.53);
+    color: #d4af37;
+}
+
+.sidebar .nav-link.active {
+    background-color: #d4af37;
+    color: white;
+}
+
+/* ================= CONTENT ================= */
+
+.main-content {
+    margin-left: 240px;
+    margin-top: 70px;
+    padding: 30px;
+}
+
+
+
+/* Dashboard Stat Cards */
+.stat-card {
+    border: none;
+    border-radius: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+}
+
+.card-users {
+    background: linear-gradient(135deg, #7cb8f7, #4a90e2);
+    color: #fff !important;
+}
+
+.card-employees {
+    background: linear-gradient(135deg, #91c49b, #5da068);
+    color: #fff !important;
+}
+
+.card-roles {
+    background: linear-gradient(135deg, #f2ce7e, #c2a25d);
+    color: #2b2b2b !important; /* Dark text for better contrast on gold/yellow */
+}
+
+.stat-card .card-header {
+    background: transparent;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    color: inherit;
+}
+
+.stat-card .card-body {
+    padding: 20px;
+}
+
+.stat-card .card-title {
+    font-weight: 800;
+    margin: 10px 0;
+    color: inherit;
+}

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:replace="header :: headerFragment">
+    <title>Our Gym | Member Attendance</title>
+</head>
+
+<body>
+    <!-- ================= TOP NAVBAR ================= -->
+    <nav th:replace="navbar :: navbarFragment"></nav>
+
+    <!-- ================= SIDEBAR ================= -->
+    <div th:replace="navbar :: sidebarFragment"></div>
+
+    <!-- ================= MAIN CONTENT ================= -->
+    <div class="main-content">
+        <div class="container-fluid mt-5 pt-4">
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <div>
+                            <h2><i class="fa-solid fa-clipboard-user"></i> Member Attendance</h2>
+                            <p class="text-muted">Mark attendance and view attendance history</p>
+                        </div>
+                        <div class="text-end">
+                            <h4 id="currentDate" class="text-primary mb-0"></h4>
+                            <small id="currentTime" class="text-muted"></small>
+                        </div>
+                    </div>
+
+                    <!-- Statistics Cards -->
+                    <div class="row mb-4">
+                        <div class="col-md-3">
+                            <div class="card bg-success text-white">
+                                <div class="card-body text-center">
+                                    <h5>Present Today</h5>
+                                    <h2 id="presentCount">0</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card bg-warning text-dark">
+                                <div class="card-body text-center">
+                                    <h5>Late Today</h5>
+                                    <h2 id="lateCount">0</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card bg-danger text-white">
+                                <div class="card-body text-center">
+                                    <h5>Absent</h5>
+                                    <h2 id="absentCount">0</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card bg-info text-white">
+                                <div class="card-body text-center">
+                                    <h5>Total Members</h5>
+                                    <h2 id="totalMembersCount">0</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mark Attendance Section -->
+                    <div class="card mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0"><i class="fa-solid fa-user-check"></i> Mark Attendance</h5>
+                        </div>
+                        <div class="card-body">
+                            <!-- Member Search -->
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Search Member</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fa-solid fa-search"></i></span>
+                                        <input type="text" class="form-control" id="memberSearch" 
+                                               placeholder="Enter Member ID or Name..." 
+                                               onkeyup="searchMember()">
+                                    </div>
+                                    <div id="searchResults" class="list-group mt-2" style="max-height: 200px; overflow-y: auto;">
+                                        <!-- Search results will appear here -->
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div id="selectedMemberInfo" class="d-none">
+                                        <label class="form-label fw-bold">Selected Member</label>
+                                        <div class="alert alert-info mb-0">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <h5 class="mb-1" id="selectedMemberName"></h5>
+                                                    <p class="mb-0">ID: <span id="selectedMemberId"></span> | NIC: <span id="selectedMemberNic"></span></p>
+                                                </div>
+                                                <div class="text-end">
+                                                    <span id="todayStatus" class="badge bg-secondary">Not Marked</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Attendance Form -->
+                            <div id="attendanceForm" class="d-none">
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label class="form-label">Date</label>
+                                        <input type="date" class="form-control" id="attendanceDate">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Check-In Time</label>
+                                        <input type="time" class="form-control" id="checkInTime">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Check-Out Time</label>
+                                        <input type="time" class="form-control" id="checkOutTime">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Status</label>
+                                        <select class="form-control" id="attendanceStatus">
+                                            <option value="PRESENT">Present</option>
+                                            <option value="LATE">Late</option>
+                                            <option value="ABSENT">Absent</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-md-9">
+                                        <label class="form-label">Notes</label>
+                                        <input type="text" class="form-control" id="attendanceNotes" placeholder="Optional notes...">
+                                    </div>
+                                    <div class="col-md-3 d-flex align-items-end">
+                                        <button class="btn btn-success w-100" onclick="markAttendance()">
+                                            <i class="fa-solid fa-check"></i> Mark Attendance
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Attendance History -->
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0"><i class="fa-solid fa-history"></i> Attendance History</h5>
+                            <div class="d-flex gap-2">
+                                <input type="date" class="form-control form-control-sm" id="historyStartDate">
+                                <input type="date" class="form-control form-control-sm" id="historyEndDate">
+                                <button class="btn btn-sm btn-outline-primary" onclick="loadAttendanceHistory()">
+                                    <i class="fa-solid fa-filter"></i> Filter
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary" onclick="clearHistoryFilter()">
+                                    <i class="fa-solid fa-times"></i> Clear
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="loadingSpinner" class="text-center py-4" style="display: none;">
+                                <div class="spinner-border text-primary" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <p class="mt-2">Loading attendance...</p>
+                            </div>
+                            
+                            <div id="attendanceTableContainer">
+                                <table class="table table-striped table-hover" id="attendanceTable">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Member</th>
+                                            <th>Date</th>
+                                            <th>Check-In</th>
+                                            <th>Check-Out</th>
+                                            <th>Status</th>
+                                            <th>Marked By</th>
+                                            <th>Notes</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="attendanceTableBody">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+    <div th:replace="footer :: footerFragment"></div>
+
+    <script src="/projectResources/jQuery-4.0.0.min.js"></script>
+    <script src="/projectResources/bootstrap-5.3.7/js/bootstrap.bundle.min.js"></script>
+    <script src="/projectResources/common.js"></script>
+    <script src="/js/attendance.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+# ========================
+# Java / Spring Boot
+# ========================
+*.class
+*.log
+
+# Package files
+*.jar
+*.war
+*.ear
+
+# Spring Boot / Maven / Gradle
+target/
+build/
+out/
+
+# Maven wrapper
+.mvn/
+mvnw
+mvnw.cmd
+
+# Gradle wrapper
+.gradle/
+gradle-app.setting
+!gradle-wrapper.jar
+
+# ========================
+# IDEs
+# ========================
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# Eclipse
+.project
+.classpath
+.settings/
+bin/
+
+# VS Code
+.vscode/
+
+# ========================
+# OS files
+# ========================
+.DS_Store
+Thumbs.db
+
+# ========================
+# Logs / temp
+# ========================
+logs/
+*.tmp
+*.swp
+*.swo
+
+# ========================
+# Environment / secrets
+# ========================
+.env
+application-local.properties
+application-local.yml
